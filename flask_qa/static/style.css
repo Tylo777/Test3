@@ -145,3 +145,9 @@ body.loggedin {
 	padding: 5px;
 	margin: 0 0 10px 0;
 }
+
+.logo {
+	width: 60px;
+	display: block;
+	margin: auto;
+}
