@@ -52,14 +52,14 @@ def profile_appd_user():
     if not current_user.appd:
         return redirect(url_for('main.index'))
 
-    # unanswered_questions = Question.query\
-    #     .filter_by(appd_id=current_user.id)\
-    #     .filter(Question.answer == None)\
-    #     .all()
+    unanswered_questions = Question.query\
+        .filter_by(appd_id=current_user.id)\
+        .filter(Question.answer == None)\
+        .all()
 
-    # context = {
-    #     'unanswered_questions' : unanswered_questions
-    # }
+    context = {
+        'unanswered_questions' : unanswered_questions
+    }
 
     return render_template('profile_appd_user.html', **context)
 
