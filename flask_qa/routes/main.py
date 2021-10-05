@@ -6,88 +6,89 @@ from flask_qa.models import Question, User
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
-def index():
-    questions = Question.query.filter(Question.answer != None).all()
 
-    context = {
-        'questions' : questions
-    }
+# @main.route('/')
+# def index():
+#     questions = Question.query.filter(Question.answer != None).all()
 
-    return render_template('home.html', **context)
+#     context = {
+#         'questions' : questions
+#     }
 
-@main.route('/profile_user', methods=['GET', 'POST'])
-@login_required
-def profile_user():
-    if request.method == 'POST':
-        question = request.form['question']
-        appd = request.form['appd']
+#     return render_template('home.html', **context)
 
-        question = Question(
-            question=question, 
-            appd_id=appd, 
-            asked_by_id=current_user.id
-        )
+# @main.route('/profile_user', methods=['GET', 'POST'])
+# @login_required
+# def profile_user():
+#     if request.method == 'POST':
+#         question = request.form['question']
+#         appd = request.form['appd']
 
-        db.session.add(question)
-        db.session.commit()
+#         question = Question(
+#             question=question, 
+#             appd_id=appd, 
+#             asked_by_id=current_user.id
+#         )
 
-        return redirect(url_for('main.index'))
+#         db.session.add(question)
+#         db.session.commit()
 
-    appd_users = User.query.filter_by(appd=True).all()
+#         return redirect(url_for('main.index'))
 
-    context = {
-        'appd_users' : appd_users
-    }
+#     appd_users = User.query.filter_by(appd=True).all()
 
-    return render_template('profile_user.html', **context)
+#     context = {
+#         'appd_users' : appd_users
+#     }
 
-@main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
-@login_required
-def answer(question_id):
-    if not current_user.appd:
-        return redirect(url_for('main.index'))
+#     return render_template('profile_user.html', **context)
 
-    question = Question.query.get_or_404(question_id)
+# @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
+# @login_required
+# def answer(question_id):
+#     if not current_user.appd:
+#         return redirect(url_for('main.index'))
 
-    if request.method == 'POST':
-        question.answer = request.form['answer']
-        db.session.commit()
+#     question = Question.query.get_or_404(question_id)
 
-        return redirect(url_for('main.profile_appd_user'))
+#     if request.method == 'POST':
+#         question.answer = request.form['answer']
+#         db.session.commit()
 
-    context = {
-        'question' : question
-    }
+#         return redirect(url_for('main.profile_appd_user'))
 
-    return render_template('answer.html', **context)
+#     context = {
+#         'question' : question
+#     }
 
-@main.route('/question/<int:question_id>')
-def question(question_id):
-    question = Question.query.get_or_404(question_id)
+#     return render_template('answer.html', **context)
 
-    context = {
-        'question' : question
-    }
+# @main.route('/question/<int:question_id>')
+# def question(question_id):
+#     question = Question.query.get_or_404(question_id)
 
-    return render_template('question.html', **context)
+#     context = {
+#         'question' : question
+#     }
 
-@main.route('/profile_appd_user')
-@login_required
-def profile_appd_user():
-    if not current_user.appd:
-        return redirect(url_for('main.index'))
+#     return render_template('question.html', **context)
 
-    unanswered_questions = Question.query\
-        .filter_by(appd_id=current_user.id)\
-        .filter(Question.answer == None)\
-        .all()
+# @main.route('/profile_appd_user')
+# @login_required
+# def profile_appd_user():
+#     if not current_user.appd:
+#         return redirect(url_for('main.index'))
 
-    context = {
-        'unanswered_questions' : unanswered_questions
-    }
+#     unanswered_questions = Question.query\
+#         .filter_by(appd_id=current_user.id)\
+#         .filter(Question.answer == None)\
+#         .all()
 
-    return render_template('profile_appd_user.html', **context)
+#     context = {
+#         'unanswered_questions' : unanswered_questions
+#     }
+
+#     return render_template('profile_appd_user.html', **context)
 
 @main.route('/users')
 @login_required
