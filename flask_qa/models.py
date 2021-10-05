@@ -7,7 +7,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     password = db.Column(db.String(100))
-    expert = db.Column(db.Boolean)
+    appd = db.Column(db.Boolean)
     admin = db.Column(db.Boolean)
 
     questions_asked = db.relationship(
@@ -19,8 +19,8 @@ class User(UserMixin, db.Model):
 
     answers_requested = db.relationship(
         'Question',
-        foreign_keys='Question.expert_id',
-        backref='expert',
+        foreign_keys='Question.appd_id',
+        backref='appd',
         lazy=True
     )
 
@@ -37,4 +37,4 @@ class Question(db.Model):
     question = db.Column(db.Text)
     answer = db.Column(db.Text)
     asked_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    expert_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    appd_id = db.Column(db.Integer, db.ForeignKey('user.id'))

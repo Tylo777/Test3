@@ -21,11 +21,11 @@ def index():
 def ask():
     if request.method == 'POST':
         question = request.form['question']
-        expert = request.form['expert']
+        appd = request.form['appd']
 
         question = Question(
             question=question, 
-            expert_id=expert, 
+            appd_id=appd, 
             asked_by_id=current_user.id
         )
 
@@ -34,10 +34,10 @@ def ask():
 
         return redirect(url_for('main.index'))
 
-    experts = User.query.filter_by(expert=True).all()
+    appd_users = User.query.filter_by(appd=True).all()
 
     context = {
-        'experts' : experts
+        'appd_users' : appd_users
     }
 
     return render_template('ask.html', **context)
@@ -45,7 +45,7 @@ def ask():
 @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
 @login_required
 def answer(question_id):
-    if not current_user.expert:
+    if not current_user.appd:
         return redirect(url_for('main.index'))
 
     question = Question.query.get_or_404(question_id)
@@ -75,11 +75,11 @@ def question(question_id):
 @main.route('/unanswered')
 @login_required
 def unanswered():
-    if not current_user.expert:
+    if not current_user.appd:
         return redirect(url_for('main.index'))
 
     unanswered_questions = Question.query\
-        .filter_by(expert_id=current_user.id)\
+        .filter_by(appd_id=current_user.id)\
         .filter(Question.answer == None)\
         .all()
 
@@ -111,7 +111,7 @@ def promote(user_id):
 
     user = User.query.get_or_404(user_id)
 
-    user.expert = True
+    user.appd = True
     db.session.commit()
 
     return redirect(url_for('main.users'))

@@ -17,7 +17,7 @@ def register():
             name=name, 
             unhashed_password=unhashed_password,
             admin=False,  
-            expert=False
+            appd=False
         )
 
         db.session.add(user)
