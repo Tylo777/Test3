@@ -16,13 +16,23 @@ def index():
     #     'questions' : questions
     # }
 
-    return render_template('home.html', **context)
+    return render_template('home.html')
 
 @main.route('/profile_user', methods=['GET', 'POST'])
 @login_required
 def profile_user():
 
+
+    appd_users = User.query.filter_by(appd=True).all()
+
+    context = {
+        'appd_users' : appd_users
+    }
+
     return render_template('profile_user.html', **context)
+
+
+
 
 
 ## Test for db
