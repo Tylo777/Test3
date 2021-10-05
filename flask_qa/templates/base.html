@@ -37,7 +37,7 @@
             <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
             {% endif %}
             {% if current_user.is_authenticated and current_user.appd %}
-            <li><a href="{{ url_for('main.unanswered') }}">Unanswered Questions</a></li>
+            <li><a href="{{ url_for('main.profile_appd_user') }}">Profile</a></li>
             {% endif %}
             {% if current_user.is_authenticated and current_user.admin %}
             <li><a href="{{ url_for('main.users') }}">User Setup</a></li>

@@ -54,7 +54,7 @@ def answer(question_id):
         question.answer = request.form['answer']
         db.session.commit()
 
-        return redirect(url_for('main.unanswered'))
+        return redirect(url_for('main.profile_appd_user'))
 
     context = {
         'question' : question
@@ -72,9 +72,9 @@ def question(question_id):
 
     return render_template('question.html', **context)
 
-@main.route('/unanswered')
+@main.route('/profile_appd_user')
 @login_required
-def unanswered():
+def profile_appd_user():
     if not current_user.appd:
         return redirect(url_for('main.index'))
 
@@ -87,7 +87,7 @@ def unanswered():
         'unanswered_questions' : unanswered_questions
     }
 
-    return render_template('unanswered.html', **context)
+    return render_template('profile_appd_user.html', **context)
 
 @main.route('/users')
 @login_required
