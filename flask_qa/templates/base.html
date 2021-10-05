@@ -34,6 +34,8 @@
             <li><a href="{{ url_for('auth.login') }}">Login</a></li>
             <li><a href="{{ url_for('auth.register') }}">Register</a></li>
             {% endif %}
+
+            <!--fix nav bar-->
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
             {% endif %}
