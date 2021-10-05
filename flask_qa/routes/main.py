@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user, login_required
 
 from flask_qa.extensions import db
-##from flask_qa.models import Question, User
+
 from flask_qa.models import User
 
 main = Blueprint('main', __name__)
@@ -10,33 +10,12 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    #questions = Question.query.filter(Question.answer != None).all()
-
-    # context = {
-    #     'questions' : questions
-    # }
-
+   
     return render_template('home.html')
 
-
-# Test for db
 @main.route('/profile_user', methods=['GET', 'POST'])
 @login_required
 def profile_user():
-    # if request.method == 'POST':
-    #     question = request.form['question']
-    #     appd = request.form['appd']
-
-    #     question = Question(
-    #         question=question, 
-    #         appd_id=appd, 
-    #         asked_by_id=current_user.id
-    #     )
-
-    #     db.session.add(question)
-    #     db.session.commit()
-
-    #     return redirect(url_for('main.index'))
 
     appd_users = User.query.filter_by(appd=True).all()
 
@@ -51,15 +30,6 @@ def profile_user():
 def profile_appd_user():
     if not current_user.appd:
         return redirect(url_for('main.index'))
-
-    # unanswered_questions = Question.query\
-    #     .filter_by(appd_id=current_user.id)\
-    #     .filter(Question.answer == None)\
-    #     .all()
-
-    # context = {
-    #     'unanswered_questions' : unanswered_questions
-    # }
 
     users = User.query.filter_by(appd=True).all()
 
