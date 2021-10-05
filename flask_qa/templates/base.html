@@ -36,7 +36,7 @@
             {% endif %}
 
             
-            {% if current_user.is_authenticated %}
+            <!-- {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
             {% elseif current_user.is_authenticated and current_user.appd %}
             <li><a href="{{ url_for('main.profile_appd_user') }}">Profile</a></li>
@@ -45,9 +45,9 @@
             {% endif %}
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-            {% endif %}
+            {% endif %} -->
 
-            <!-- {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
             {% endif %}
             {% if current_user.is_authenticated and current_user.appd %}
@@ -58,7 +58,7 @@
             {% endif %}
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-            {% endif %} -->
+            {% endif %}
 
 
           </ul>
