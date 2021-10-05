@@ -35,13 +35,13 @@ def index():
 
 #         return redirect(url_for('main.index'))
 
-#     appd_users = User.query.filter_by(appd=True).all()
+    appd_users = User.query.filter_by(appd=True).all()
 
-#     context = {
-#         'appd_users' : appd_users
-#     }
+    context = {
+        'appd_users' : appd_users
+    }
 
-#     return render_template('profile_user.html', **context)
+    return render_template('profile_user.html', **context)
 
 @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
 @login_required
