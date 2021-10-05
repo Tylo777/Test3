@@ -10,7 +10,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    questions = Question.query.filter(Question.answer != None).all()
+    #questions = Question.query.filter(Question.answer != None).all()
 
     context = {
         'questions' : questions
