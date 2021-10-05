@@ -16,9 +16,9 @@ def index():
 
     return render_template('home.html', **context)
 
-@main.route('/ask', methods=['GET', 'POST'])
+@main.route('/profile_user', methods=['GET', 'POST'])
 @login_required
-def ask():
+def profile_user():
     if request.method == 'POST':
         question = request.form['question']
         appd = request.form['appd']
@@ -40,7 +40,7 @@ def ask():
         'appd_users' : appd_users
     }
 
-    return render_template('ask.html', **context)
+    return render_template('profile_user.html', **context)
 
 @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
 @login_required
