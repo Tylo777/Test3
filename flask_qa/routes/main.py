@@ -20,26 +20,26 @@ def index():
 @main.route('/profile_user', methods=['GET', 'POST'])
 @login_required
 def profile_user():
-    # if request.method == 'POST':
-    #     question = request.form['question']
-    #     appd = request.form['appd']
+    if request.method == 'POST':
+        question = request.form['question']
+        appd = request.form['appd']
 
-    #     question = Question(
-    #         question=question, 
-    #         appd_id=appd, 
-    #         asked_by_id=current_user.id
-    #     )
+        question = Question(
+            question=question, 
+            appd_id=appd, 
+            asked_by_id=current_user.id
+        )
 
-    #     db.session.add(question)
-    #     db.session.commit()
+        db.session.add(question)
+        db.session.commit()
 
-    #     return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))
 
-    # appd_users = User.query.filter_by(appd=True).all()
+    appd_users = User.query.filter_by(appd=True).all()
 
-    # context = {
-    #     'appd_users' : appd_users
-    # }
+    context = {
+        'appd_users' : appd_users
+    }
 
     return render_template('profile_user.html', **context)
 
