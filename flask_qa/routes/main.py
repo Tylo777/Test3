@@ -43,25 +43,25 @@ def profile_user():
 
     return render_template('profile_user.html', **context)
 
-@main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
-@login_required
-def answer(question_id):
-    if not current_user.appd:
-        return redirect(url_for('main.index'))
+# @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
+# @login_required
+# def answer(question_id):
+#     if not current_user.appd:
+#         return redirect(url_for('main.index'))
 
-    question = Question.query.get_or_404(question_id)
+#     question = Question.query.get_or_404(question_id)
 
-    if request.method == 'POST':
-        question.answer = request.form['answer']
-        db.session.commit()
+#     if request.method == 'POST':
+#         question.answer = request.form['answer']
+#         db.session.commit()
 
-        return redirect(url_for('main.profile_appd_user'))
+#         return redirect(url_for('main.profile_appd_user'))
 
-    context = {
-        'question' : question
-    }
+#     context = {
+#         'question' : question
+#     }
 
-    return render_template('answer.html', **context)
+#     return render_template('answer.html', **context)
 
 @main.route('/question/<int:question_id>')
 def question(question_id):
