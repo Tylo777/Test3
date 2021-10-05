@@ -12,9 +12,9 @@ main = Blueprint('main', __name__)
 def index():
     #questions = Question.query.filter(Question.answer != None).all()
 
-    context = {
-        'questions' : questions
-    }
+    # context = {
+    #     'questions' : questions
+    # }
 
     return render_template('home.html', **context)
 
@@ -22,17 +22,17 @@ def index():
 @login_required
 def profile_user():
     if request.method == 'POST':
-        question = request.form['question']
-        appd = request.form['appd']
+        # question = request.form['question']
+        # appd = request.form['appd']
 
-        question = Question(
-            question=question, 
-            appd_id=appd, 
-            asked_by_id=current_user.id
-        )
+        # question = Question(
+        #     question=question, 
+        #     appd_id=appd, 
+        #     asked_by_id=current_user.id
+        # )
 
-        db.session.add(question)
-        db.session.commit()
+        # db.session.add(question)
+        # db.session.commit()
 
         return redirect(url_for('main.index'))
 
