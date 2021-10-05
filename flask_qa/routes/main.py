@@ -2,19 +2,19 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user, login_required
 
 from flask_qa.extensions import db
-#from flask_qa.models import Question, User
-from flask_qa.models import User
+from flask_qa.models import Question, User
+#from flask_qa.models import User
 
 main = Blueprint('main', __name__)
 
 
 @main.route('/')
 def index():
-    # questions = Question.query.filter(Question.answer != None).all()
+    questions = Question.query.filter(Question.answer != None).all()
 
-    # context = {
-    #     'questions' : questions
-    # }
+    context = {
+        'questions' : questions
+    }
 
     return render_template('home.html', **context)
 
@@ -43,36 +43,6 @@ def profile_user():
     }
 
     return render_template('profile_user.html', **context)
-
-# @main.route('/answer/<int:question_id>', methods=['GET', 'POST'])
-# @login_required
-# def answer(question_id):
-#     if not current_user.appd:
-#         return redirect(url_for('main.index'))
-
-#     question = Question.query.get_or_404(question_id)
-
-#     if request.method == 'POST':
-#         question.answer = request.form['answer']
-#         db.session.commit()
-
-#         return redirect(url_for('main.profile_appd_user'))
-
-#     context = {
-#         'question' : question
-#     }
-
-#     return render_template('answer.html', **context)
-
-# @main.route('/question/<int:question_id>')
-# def question(question_id):
-#     question = Question.query.get_or_404(question_id)
-
-#     context = {
-#         'question' : question
-#     }
-
-#     return render_template('question.html', **context)
 
 @main.route('/profile_appd_user')
 @login_required
