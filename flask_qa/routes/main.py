@@ -63,15 +63,15 @@ def profile_user():
 
 #     return render_template('answer.html', **context)
 
-@main.route('/question/<int:question_id>')
-def question(question_id):
-    question = Question.query.get_or_404(question_id)
+# @main.route('/question/<int:question_id>')
+# def question(question_id):
+#     question = Question.query.get_or_404(question_id)
 
-    context = {
-        'question' : question
-    }
+#     context = {
+#         'question' : question
+#     }
 
-    return render_template('question.html', **context)
+#     return render_template('question.html', **context)
 
 @main.route('/profile_appd_user')
 @login_required
