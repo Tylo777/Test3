@@ -10,19 +10,19 @@ class User(UserMixin, db.Model):
     appd = db.Column(db.Boolean)
     admin = db.Column(db.Boolean)
 
-    questions_asked = db.relationship(
-        'Question', 
-        foreign_keys='Question.asked_by_id', 
-        backref='asker', 
-        lazy=True
-    )
+    # questions_asked = db.relationship(
+    #     'Question', 
+    #     foreign_keys='Question.asked_by_id', 
+    #     backref='asker', 
+    #     lazy=True
+    # )
 
-    answers_requested = db.relationship(
-        'Question',
-        foreign_keys='Question.appd_id',
-        backref='appd',
-        lazy=True
-    )
+    # answers_requested = db.relationship(
+    #     'Question',
+    #     foreign_keys='Question.appd_id',
+    #     backref='appd',
+    #     lazy=True
+    # )
 
     @property
     def unhashed_password(self):
@@ -32,9 +32,9 @@ class User(UserMixin, db.Model):
     def unhashed_password(self, unhashed_password):
         self.password = generate_password_hash(unhashed_password)
 
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.Text)
-    answer = db.Column(db.Text)
-    asked_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    appd_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+# class Question(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     question = db.Column(db.Text)
+#     answer = db.Column(db.Text)
+#     asked_by_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#     appd_id = db.Column(db.Integer, db.ForeignKey('user.id'))
