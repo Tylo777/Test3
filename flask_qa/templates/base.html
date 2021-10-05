@@ -28,12 +28,26 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+
             <li><a href="{{ url_for('main.index') }}">Home</a></li>
             {% if not current_user.is_authenticated %}
             <li><a href="{{ url_for('auth.login') }}">Login</a></li>
             <li><a href="{{ url_for('auth.register') }}">Register</a></li>
             {% endif %}
+
+            
             {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
+            {% elseif current_user.is_authenticated and current_user.appd %}
+            <li><a href="{{ url_for('main.profile_appd_user') }}">Profile</a></li>
+            {% elseif current_user.is_authenticated and current_user.admin %}
+            <li><a href="{{ url_for('main.users') }}">User Setup</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% endif %}
+
+            <!-- {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('main.profile_user') }}">Profile</a></li>
             {% endif %}
             {% if current_user.is_authenticated and current_user.appd %}
@@ -44,7 +58,9 @@
             {% endif %}
             {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-            {% endif %}
+            {% endif %} -->
+
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
